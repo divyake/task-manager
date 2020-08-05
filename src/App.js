@@ -2,18 +2,22 @@ import React from 'react';
 import {connect} from 'react-redux';
 import "bootstrap/dist/css/bootstrap.min.css"
 import TaskPage from "./components/TaskPage";
-import {editTask} from './actions';
+import {editTask, createTask} from './actions';
 
 
 function App(props) {
 
-  const onStatuschange = (id, status) => {
+  const onStatusChange = (id, status) => {
     props.dispatch(editTask(id,{status}))
+  };
+
+  const onCreateTask = ({title, description}) => {
+    props.dispatch(createTask({title, description}))
   }
 
   return (
     <>
-      <TaskPage tasks={props.tasks} onStatuschange={onStatuschange} />
+      <TaskPage tasks={props.tasks} onStatusChange={onStatusChange} onCreateTask={onCreateTask} />
     </>
   );
 }
