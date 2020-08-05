@@ -25,8 +25,10 @@ const TaskPage = (props) => {
         return TASK_STATUS.map((status, id) => {
             const statusTasks = tasks.filter((task) => task.status === status);
             return(
-                <div key={id}>
-                    <TaskList key={status} status={status} tasks={statusTasks}/> 
+                <div className="cold-md-3 card m-2 p-0" key={id}>
+                    <TaskList key={status} status={status} tasks={statusTasks}
+                    onStatusChange={props.onStatusChange}
+                    /> 
                 </div>
             )
         })

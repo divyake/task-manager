@@ -1,3 +1,4 @@
+import {EDIT_TASK} from '../actions/types'
 const initialState = [
     {
         id : 1,
@@ -9,11 +10,22 @@ const initialState = [
         id : 2,
         title : "learn Redux",
         description : "Let's learn Redux  today",
-        status : "In Progress"
+        status : "Completed"
     }
 ]
 
 const tasks = (state = {tasks: initialState}, action) => {
+    if (action.type === EDIT_TASK) {
+        const {payload} = action;
+        return {
+            tasks : state.tasks.map(task => {
+                if(task.id === payload.id) {
+                    return Object.assign({}, task, payload.params)
+                }
+                return task;
+            }),
+        };
+    }
     return state
 };
 
